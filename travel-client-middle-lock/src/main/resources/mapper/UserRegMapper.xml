@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--xml版本与命名空间定义-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--定义所在的命名空间-->
+<mapper namespace="com.zheng.travel.client.lock.mapper.UserRegMapper" >
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

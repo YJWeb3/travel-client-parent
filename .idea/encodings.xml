@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/travel-client-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-commons/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-seata-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-seata-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-seata-product/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-seata-product/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-shardingjdbc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-shardingjdbc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-task/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distribute-task/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distrubute-lock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-distrubute-lock/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-email/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-email/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-mapper/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-mapper/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-middle-lock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-middle-lock/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-mq-data-message/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-mq-data-message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-mq-message/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-mq-message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-redisson-queue/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-redisson-queue/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/travel-client-service/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

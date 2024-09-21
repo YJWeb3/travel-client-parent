@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <springProperty scope="context" name="LOG_PATH" source="myapp.logpath" defaultValue="logs"/>
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <!-- 文件日期滚动记录 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--初始文件名-->
+        <file>${LOG_PATH}/log_file.log</file>
+        <!--日志是否追加 true-->
+        <append>true</append>
+        <!--可以支持并发-->
+        <prudent>true</prudent>
+        <!--开始定义日志的回滚策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件每天生成的格式是-->
+            <fileNamePattern>${LOG_PATH}/log_file_%d{yyyy-mm-dd.HH.MM}.log</fileNamePattern>
+            <!-- maxHistory日志保留时长，30天。超过天数后删除日志文件，同时配套目录一起删除。该参数不一定是指天数，也可以是月份数。
+            具体参考滚动规则fileNamePattern，看是依赖什么进行滚动的-->
+            <maxHistory>30</maxHistory>
+            <!-- totalSizeCap最大日志量-->
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <!--滚动触发规则-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!--maxFileSize单个文件最大量，如果达到这个最大量。日志有可能会出现报错，新日志无法存入。-->
+            <maxFileSize>1MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>【FILE】 %green(%d{yyyy-MM-dd HH:mm:ss:SSS}) [%thread] [%-5level] %logger %M %L - %msg%n</pattern>
+        </encoder>
+        <!-- 把error以下级别的日志过滤掉  info < warn <error  -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
+            <pattern>【KSD - CONSOLE】 %clr(%d{yyyy-MM-dd HH:mm:ss:SSS}){yellow} %clr([%thread]){green} %blue([%-5level]) %logger %M %L - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+</configuration>

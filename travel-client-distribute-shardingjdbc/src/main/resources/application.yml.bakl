@@ -1,0 +1,77 @@
+server:
+  port: 8084
+
+
+# Sharding Jdbc配置
+# 分库的数量（注意：需要排除主库）
+dataBaseSize: 2
+# 分表的数量
+tableSize: 10
+spring:
+  shardingsphere:
+    enabled: true
+    props:
+      sql-show: true
+    mode:
+      type: Memory
+    datasource:
+      # 配置真实数据源
+      names: master-ds,slave-0,slave-1
+      master-ds: # 配置第 1 个数据源
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://139.224.164.101:3350/testdb
+        username: root
+        password: 123123
+      slave-0: # 配置第 2 个数据源
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://139.224.164.101:3360/testdb
+        username: root
+        password: 123123
+      slave-1: # 配置第 2 个数据源
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://139.224.164.101:3360/testdb
+        username: root
+        password: 123123
+    rules:
+      sharding:
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+        # 配置分表策略
+        tables:
+          t_order:
+            actual-data-nodes: master-ds.t_order_$->{0..1}
+            # 配置分表策略
+            table-strategy:
+              standard:
+                sharding-column: order_id
+                sharding-algorithm-name: t-order-inline
+            # 配置当前订单表的注主键是order_id 用雪花算法生成
+            key-generate-strategy:
+              column: order_id
+              key-generator-name: snowflake
+        sharding-algorithms:
+          t-order-inline:
+            type: INLINE
+            props:
+              algorithm-expression: t_order_$->{order_id % 2}
+      #读写分离配置
+      readwriteSplitting:
+        data-sources:
+          ds:
+            # 这里必须是static 否则报错
+            type: static
+            # 负载均衡的名字
+            loadBalancerName: load_balancer
+            props:
+              write-data-source-name: master-ds
+              read-data-source-names: slave-0,slave-1
+          loadBalancers:
+            load_balancer: # 负载均衡算法名称
+              type: ROUND_ROBIN # 负载均衡算法类型 RANDOM 随机  WEIGHT 权重
+              props:
+                default: 0
+

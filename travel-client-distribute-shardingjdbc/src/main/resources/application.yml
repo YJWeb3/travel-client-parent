@@ -1,0 +1,70 @@
+server:
+  port: 8084
+
+
+# Sharding Jdbc配置
+# 分库的数量（注意：需要排除主库）
+dataBaseSize: 2
+# 分表的数量
+tableSize: 2
+spring:
+  shardingsphere:
+    enabled: true
+    props:
+      sql-show: true
+    datasource:
+      # 配置真实数据源
+      names: master-ds,slave-0,slave-1
+      master-ds: # 配置第 1 个数据源
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://139.224.164.101:3350/testdb
+        username: root
+        password: 123123
+      slave-0: # 配置第 2 个数据源
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://139.224.164.101:3360/testdb
+        username: root
+        password: 123123
+      slave-1: # 配置第 2 个数据源
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://139.224.164.101:3360/testdb
+        username: root
+        password: 123123
+    rules:
+      sharding:
+        # 配置 分片算法
+        sharding-algorithms:
+          shardingbytime:
+            # 分片类型
+            type: HASH_MOD
+            props:
+              # 分片开始时间 要加""不然会被解析为非字符串类型导致拿不到值
+              sharding-count: "2"
+        tables:
+          t_order: # 分表，表名
+            # 分表年月 ds指向下面读写分离数据的名称
+            actual-data-nodes: ds.t_order_${0..1}
+            table-strategy: # 配置分表策略
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: shardingbytime
+      #读写分离配置
+      readwriteSplitting:
+        data-sources:
+          ds:
+            # 这里必须是static 否则报错
+            type: static
+            # 负载均衡的名字
+            loadBalancerName: load_balancer
+            props:
+              write-data-source-name: master-ds
+              read-data-source-names: slave-0,slave-1
+          loadBalancers:
+            load_balancer: # 负载均衡算法名称
+              type: ROUND_ROBIN # 负载均衡算法类型 RANDOM 随机  WEIGHT 权重
+              props:
+                default: 0
+

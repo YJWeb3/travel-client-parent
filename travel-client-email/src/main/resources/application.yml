@@ -1,0 +1,23 @@
+server:
+  port: 8588
+
+spring:
+  mail:
+    #smtp服务主机  qq邮箱则为smtp.qq.com
+    host: smtp.163.com
+    #服务协议
+    protocol: smtp
+    # 编码集
+    default-encoding: UTF-8
+    #发送邮件的账户- 发送者
+    username: 3544839383@qq.com
+    #发送邮件的账户 授权码
+    password: DGIERSJEFPYNNJFW
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true

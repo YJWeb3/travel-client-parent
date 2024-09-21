@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zheng.travel.client.mapper.userorder.UserOrderMapper">
+
+    <update id="updateNoPayOrderStatus">
+        UPDATE kss_user_order SET status = -1 WHERE id in(
+            SELECT c.id from (
+                                 SELECT id,TIMESTAMPDIFF(MINUTE,create_time,NOW()) as mins FROM kss_user_order WHERE status = 0
+                             ) c WHERE c.mins > 30
+        )
+    </update>
+
+
+    <select id="selectOrderStatusInfo" resultType="java.util.Map">
+        SELECT count(1) as value,"全部" as name,'' as paystatus  from kss_user_order_hotel WHERE user_id = #{userId}
+        UNION ALL
+        SELECT count(1) as value,"未支付" as name,'0' as paystatus from kss_user_order_hotel WHERE user_id = #{userId} and status = 0
+        UNION ALL
+        SELECT count(1) as value,"已支付" as name,'1' as paystatus from kss_user_order_hotel WHERE user_id = #{userId}  and status = 1
+        UNION ALL
+        SELECT count(1) as value,"待评价" as name,'2' as paystatus from kss_user_order_hotel WHERE user_id = #{userId}  and status = 2
+        UNION ALL
+        SELECT count(1) as value,"已完成" as name,'3' as paystatus from kss_user_order_hotel WHERE user_id = #{userId}  and status = 3
+    </select>
+
+</mapper>

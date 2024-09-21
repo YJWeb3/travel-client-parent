@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="travel-client--distrubute-lock" />
+        <module name="travel-client-redisson-queue" />
+        <module name="travel-client-mq-data-message" />
+        <module name="travel-client-commons" />
+        <module name="travel-client-mq-message" />
+        <module name="travel-client-mapper" />
+        <module name="travel-client-api" />
+        <module name="travel-client-distribute-seata-order" />
+        <module name="travel-client-distribute-shardingjdbc" />
+        <module name="travel-client-distribute-seata-product" />
+        <module name="travel-client-email" />
+        <module name="travel-client-model" />
+        <module name="travel-client-distribute-task" />
+        <module name="travel-client-middle-lock" />
+        <module name="travel-client-distrubute-lock" />
+        <module name="travel-client-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="travel-client-app-api" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="travel-client--distrubute-lock" options="-parameters" />
+      <module name="travel-client-distribute-seata-order" options="-parameters" />
+      <module name="travel-client-distribute-seata-product" options="-parameters" />
+      <module name="travel-client-distribute-shardingjdbc" options="-parameters" />
+      <module name="travel-client-distribute-task" options="-parameters" />
+      <module name="travel-client-distrubute-lock" options="-parameters" />
+      <module name="travel-client-email" options="-parameters" />
+      <module name="travel-client-middle-lock" options="-parameters" />
+      <module name="travel-client-redisson-queue" options="-parameters" />
+    </option>
+  </component>
+</project>

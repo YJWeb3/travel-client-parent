@@ -1,0 +1,24 @@
+server:
+  port: ${port:8866}
+  tomcat:
+    uri-encoding: UTF-8
+    #tomcat默认限制文件上传的大小是2MB ，超过就不会被捕获，需要调整大一点或者-1不限制
+    max-swallow-size: -1
+  compression:
+    enabled: true
+    min-response-size: 1024
+
+spring:
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  profiles:
+    active: ${profile:dev}
+
+
+
+# mybatis-plus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/*.xml

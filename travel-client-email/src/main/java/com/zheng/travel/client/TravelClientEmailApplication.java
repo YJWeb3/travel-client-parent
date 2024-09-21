@@ -1,0 +1,13 @@
+package com.zheng.travel.client;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TravelClientEmailApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(TravelClientEmailApplication.class, args);
+    }
+
+}

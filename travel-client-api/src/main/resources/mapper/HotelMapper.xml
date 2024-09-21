@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zheng.travel.client.mapper.hotel.HotelMapper">
+
+
+    <select id="findUserFavHotelsPage" resultType="com.zheng.travel.client.entity.Hotel">
+        SELECT
+            t2.id,
+            t2.title,
+            t2.img,
+            t2.description,
+            t2.price,
+            t2.realprice,
+            t2.views,
+            t2.collects,
+            t2.buynum,
+            t2.create_time as createTime,
+            t2.starlevel,
+            t2.hotel_category_id as hotelCategoryId,
+            t2.hotel_brand_id as hotelBrandId,
+            t2.hotel_brand_name as hotelBrandName,
+            t2.hotel_category_name as hotelCategoryName,
+            t2.comments,
+            t2.address,
+            t2.phone
+        FROM
+            kss_user_fav_hotel t1 LEFT JOIN kss_hotel t2 ON t1.hotel_id = t2.id
+        ${ew.customSqlSegment}
+    </select>
+
+    <update id="updateAddCollections">
+        update kss_hotel set collects = collects +1 where id = #{hotelId}
+    </update>
+
+    <update id="updateMinusCollections">
+        update kss_hotel set collects = collects - 1 where id = #{hotelId}
+    </update>
+
+</mapper>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实时监听订单状况</title>
+</head>
+<body>
+
+<h1>我正在监听数据</h1>
+<h3>平台下单的数量是：<span id="ordernum"></span></h3>
+
+<script src="/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        getOrderNum();
+        setInterval(getOrderNum, 3000);
+    })
+
+    function getOrderNum() {
+        $.get("/getordernum", function (res) {
+            $("#ordernum").text(res || 0);
+        })
+    }
+
+</script>
+</body>
+</html>
